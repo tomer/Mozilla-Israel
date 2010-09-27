@@ -9,12 +9,12 @@ Author URI: http://tomercohen.com
 License: A "Slug" license name e.g. GPL2
 */
 
-
 /// Activation functions 
 register_activation_hook(__FILE__, 'moz_download_box_activation');
 //add_action('moz_download_box_hourly_event', 'moz_download_box_prepare_tables');
 add_action('moz_download_box_fetch_feeds', 'moz_download_box_update_table');
-
+add_action('wp_print_styles', 'moz_download_box_add_stylesheet');
+    
 /// Shortcode hooks
 add_shortcode('moz-download-box', 'moz_download_box_button_shortcode');
 
@@ -24,10 +24,12 @@ function moz_download_box_activation() {
 
 	$options = array (
 		'thunderbird' => array(
+			'download_url' => '//http://www.mozillamessaging.com/thunderbird/download/?product={product}-{version}&os={platform}&lang={locale}',
 			'tags_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_versions.json',
 			'builds_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_primary_builds.json',
 			'timestamp' => 0),
 		'firefox' => array(
+			'download_url' => 'http://www.mozilla.com/products/download.html?product={product}-{version}&os={platform}&lang={locale}',
 //			'enabled' => false, 
 			'tags_url' => 'http://www.mozilla.com/includes/product-details/json/firefox_versions.json',
 			'builds_url' => 'http://www.mozilla.com/includes/product-details/json/firefox_primary_builds.json',
@@ -139,6 +141,9 @@ function moz_download_box_show_feeds_form() {
 			echo ("<fieldset><legend>Feed: $feed</legend>");
 			echo ("<label for='feed[$feed][tags]'>Tags URL:</label    ><input name='feed[$feed][tags]'   id='feed[$feed][tags]' type='text' value='{$item['tags_url']}' />");
 			echo ("<label for='feed[$feed][builds]'>Builds URL:</label    ><input name='feed[$feed][builds]'   id='feed[$feed][builds]' type='text' value='{$item['builds_url']}' />");
+			
+			echo ("<label for='feed[$feed][download_url]'>Template for download URL:</label    ><input name='feed[$feed][download_url]'   id='feed[$feed][download_url]' type='text' value='{$item['download_url']}' />");
+			
 	//		echo ("<label for='feed[$feed][builds]'>Builds URL:</label><input   name=\"feed[$feed][builds]\" id=\"feed[$feed .'][builds]\" type="'text' value="'. $item['builds_url'] .'" />');
 
 			//echo ("<input name='feed[$feed][delete]' type='button' onclick='confirm(\"Are you sure?\");' value='Delete' />");
@@ -158,6 +163,7 @@ function moz_download_box_show_feeds_form() {
 		echo ('<label for="feed[new][name]">Feed name:</label   ><input name="feed[new][name]"   id="feed[new][name]"   type="text" value="" />');
 		echo ('<label for="feed[new][tags]">Tags URL:</label    ><input name="feed[new][tags]"   id="feed[new][tags]"   type="text" value="" />');
 		echo ('<label for="feed[new][builds]">Builds URL:</label><input name="feed[new][builds]" id="feed[new][builds]" type="text" value="" />');
+		echo ('<label for="feed[new][download_url]">Builds URL:</label><input name="feed[new][download_url]" id="feed[new][download_url]" type="text" value="" />');
 		echo ('</fieldset>');
 		
 		echo ('<input type="submit" name="manage_feed" /></from>');
@@ -177,6 +183,7 @@ function moz_download_box_admin_manage_feeds() {
 					echo ("<p>Creating new feed {$item['name']}...</p>");
 					$list[$item['name']]['tags_url'] = $item['tags'];
 					$list[$item['name']]['builds_url'] = $item['builds'];
+					$list[$item['name']]['download_url'] = $item['download_url'];
 					$list[$item['name']]['timestamp'] = 0;
 				}
 			}
@@ -197,6 +204,10 @@ function moz_download_box_admin_manage_feeds() {
 						$list[$tag]['builds_url'] = $item['builds'];
 					}
 					
+					if ($list[$tag]['download_url'] != $item['download_url']) {
+						echo ("<p>Updating <em>$tag</em> download url...</p>");
+						$list[$tag]['download_url'] = $item['download_url'];
+					}
 					// If is scheduled and not enabled
 					if (!isset($item['enabled']) && wp_next_scheduled('moz_download_box_fetch_feeds', array($tag)) > 0) {
 //						echo ("<p>(". wp_next_scheduled('moz_download_box_fetch_feeds', array($tag)) .")</p>"); var_dump (wp_next_scheduled('moz_download_box_fetch_feeds', array($tag)));
@@ -292,21 +303,49 @@ function moz_download_box_admin_display() {
 
 }
 
+function moz_download_box_platform_keyword($platform) {
+	switch ($platform) {
+		case 'Linux': return 'linux'; break;
+		case 'OS X': return 'osx'; break;
+		case 'Windows': return 'win'; break;
+		default: return false;
+	}
+	return false;
+}
+
+function moz_download_box_tag2product ($tag) {
+	$options = get_option('moz_download_box_feeds');
+	foreach ($options as $feed=>$item) {
+		foreach ($item['tags'] as $feed_tag => $version) {
+			if ($feed_tag == $tag) return $feed; 
+		}
+	}
+	return false;
+}
+
 function moz_download_box_draw_buttons ($tag = NULL, $locale = NULL, $os = NULL) {
 	$list  = moz_download_box_query($tag, $locale, $os);
-	
-	add_action('wp_print_styles', 'moz_download_box_add_stylesheet');
+	$options = get_option('moz_download_box_feeds');
 
-	/* TBD: if there is items */
-	$out =  count($list) ." items ";
+	add_action('wp_print_styles', 'moz_download_box_add_stylesheet');
+	
+	$out = '';
+	
 	if (count($list) > 0)
-		foreach ($list as $item) {
-			if (!$item['unavailable'] == 1)
-				$out .= moz_download_box_draw_button($item['tag'], $item['locale'], $item['platform'], $item['version'], $item['filesize']);
+		foreach ($list as $key=>$item) {
+			if (!$item['unavailable'] == 1) {
+				$product = moz_download_box_tag2product($tag);
+				$template_url = $options[$product]['download_url']; 
+				
+				$platform = moz_download_box_platform_keyword($item['platform']);
+				$download_url = moz_download_box_download_link($template_url, $item['locale'], $platform, $item['version'], $product);
+				
+				$out .= moz_download_box_draw_button($item['tag'], $item['locale'], $item['platform'], $item['version'], $item['filesize'], $product, $download_url);
+			}
 		}
 	else $out .= __('Unable to locate download links...');
 	
-	$out .= 'end';
+//	$out .= 'end';
 	return $out;
 }
 
@@ -315,20 +354,31 @@ function moz_download_box_draw_buttons ($tag = NULL, $locale = NULL, $os = NULL)
         $myStyleFile = WP_PLUGIN_DIR . '/moz_download_box/style.css';
         echo ("$myStyleUrl $myStyleFile ");
         if ( file_exists($myStyleFile) ) {
-	        echo ("exists");
             wp_register_style('moz_download_box_stylesheet', $myStyleUrl);
             wp_enqueue_style( 'moz_download_box_stylesheet');
         }
 }
 
-function moz_download_box_draw_button($tag = NULL, $locale = NULL, $os = NULL, $version = NULL, $filesize = NULL) {
-  $class = 'mozilla-product-download ';
-  if ($tag) $class    .= $tag . ' ';
-  if ($locale) $class .= "locale-$locale ";
-  if ($os) $class     .= "os-$os ";
-  if ($version) $class .= "version-$version ";
+//				$download_url = moz_download_box_download_link($template_url, $item['locale'], $item['platform'], $item['version'], $item);
+function moz_download_box_download_link ($template = 'http://download.mozilla.org/?product={product}-{version}&os={platform}&lang={locale}',  $locale = 'en-US', $os='linux', $version = '3.6.10', $product = 'firefox') {
+//http://www.mozillamessaging.com/thunderbird/download/?product=thunderbird-3.1.4&os=linux&lang=en-US
+//http://www.mozilla.com/products/download.html?product=firefox-3.6.10&os=linux&lang=en-US
+	$keywords =     array('{platform}', '{locale}', '{product}', '{version}');
+	$replacements = array($os,          $locale,    $product,    $version);
+	
+	return (str_replace($keywords, $replacements, $template));
+}
 
-  $out = "<p class='$class'><a href='#'><strong>". __('Download') ." ". __('Firefox') ."</strong> <em>";
+
+function moz_download_box_draw_button($tag = NULL, $locale = NULL, $os = NULL, $version = NULL, $filesize = NULL, $product = NULL, $download_url = '#') {	
+  $class = 'mozilla-product-download ';
+  if ($tag) $class     .= $tag . ' ';
+  if ($locale) $class  .= "locale-$locale ";
+  if ($os) $class      .= 'os-'. moz_download_box_platform_keyword($os)  .' ';
+  if ($version) $class .= "version-$version ";
+  if ($product) $class .= "product-$product ";
+
+  $out = "<p class='$class'><a href='$download_url'><strong>". __('Download') ." ". __('Firefox') ."</strong> <em>";
   if ($version) $out  .= __('version') ." ". $version .", ";
   if ($locale) $out   .= "$locale, ";
   if ($os) $out       .= "$os, ";
@@ -590,7 +640,7 @@ function moz_download_box_button_shortcode($atts, $content=null, $code="") {
     'tag' => 'LATEST_FIREFOX_VERSION',
   ), $atts));
   
-  echo ("  moz_download_box_draw_buttons($tag, $locale, $os);");
+//  echo ("  moz_download_box_draw_buttons($tag, $locale, $os);");
   
   $out = moz_download_box_draw_buttons($tag, $locale, $os);
 //  $out = moz_download_box_draw_buttons();
