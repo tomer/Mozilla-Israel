@@ -25,7 +25,7 @@ function moz_download_box_activation() {
 	$options = array (
 		'thunderbird' => array(
 			'product' => 'Thunderbird',
-			'download_url' => '//http://www.mozillamessaging.com/thunderbird/download/?product={product}-{version}&os={platform}&lang={locale}',
+			'download_url' => 'http://www.mozillamessaging.com/thunderbird/download/?product={product}-{version}&os={platform}&lang={locale}',
 			'tags_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_versions.json',
 			'builds_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_primary_builds.json',
 			'timestamp' => 0),
