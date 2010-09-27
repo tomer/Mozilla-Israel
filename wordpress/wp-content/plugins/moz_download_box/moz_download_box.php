@@ -24,11 +24,13 @@ function moz_download_box_activation() {
 
 	$options = array (
 		'thunderbird' => array(
+			'product' => 'Thunderbird',
 			'download_url' => '//http://www.mozillamessaging.com/thunderbird/download/?product={product}-{version}&os={platform}&lang={locale}',
 			'tags_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_versions.json',
 			'builds_url' => 'http://www.mozilla.com/includes/product-details/json/thunderbird_primary_builds.json',
 			'timestamp' => 0),
 		'firefox' => array(
+			'product' => 'Firefox',
 			'download_url' => 'http://www.mozilla.com/products/download.html?product={product}-{version}&os={platform}&lang={locale}',
 //			'enabled' => false, 
 			'tags_url' => 'http://www.mozilla.com/includes/product-details/json/firefox_versions.json',
@@ -144,6 +146,7 @@ function moz_download_box_show_feeds_form() {
 			
 			echo ("<label for='feed[$feed][download_url]'>Template for download URL:</label    ><input name='feed[$feed][download_url]'   id='feed[$feed][download_url]' type='text' value='{$item['download_url']}' />");
 			
+			echo ("<label for='feed[$feed][product]'>Product name:</label    ><input name='feed[$feed][product]'   id='feed[$feed][product]' type='text' value='{$item['product']}' />");
 	//		echo ("<label for='feed[$feed][builds]'>Builds URL:</label><input   name=\"feed[$feed][builds]\" id=\"feed[$feed .'][builds]\" type="'text' value="'. $item['builds_url'] .'" />');
 
 			//echo ("<input name='feed[$feed][delete]' type='button' onclick='confirm(\"Are you sure?\");' value='Delete' />");
@@ -161,9 +164,11 @@ function moz_download_box_show_feeds_form() {
 		}
 		echo ('<fieldset><legend>Add new feed</legend>');
 		echo ('<label for="feed[new][name]">Feed name:</label   ><input name="feed[new][name]"   id="feed[new][name]"   type="text" value="" />');
+		echo ('<label for="feed[new][product]">Product name:</label><input name="feed[new][product]" id="feed[new][product]" type="text" value="" />');
 		echo ('<label for="feed[new][tags]">Tags URL:</label    ><input name="feed[new][tags]"   id="feed[new][tags]"   type="text" value="" />');
 		echo ('<label for="feed[new][builds]">Builds URL:</label><input name="feed[new][builds]" id="feed[new][builds]" type="text" value="" />');
-		echo ('<label for="feed[new][download_url]">Builds URL:</label><input name="feed[new][download_url]" id="feed[new][download_url]" type="text" value="" />');
+		echo ('<label for="feed[new][download_url]">Download URL:</label><input name="feed[new][download_url]" id="feed[new][download_url]" type="text" value="" />');
+
 		echo ('</fieldset>');
 		
 		echo ('<input type="submit" name="manage_feed" /></from>');
@@ -181,6 +186,7 @@ function moz_download_box_admin_manage_feeds() {
 			if ($tag == 'new') {
 				if (isset($item['tags']) && $item['tags'] != '' && $item['builds'] != '' && $item['name'] != '') {
 					echo ("<p>Creating new feed {$item['name']}...</p>");
+					$list[$item['name']]['product'] = $item['product'];
 					$list[$item['name']]['tags_url'] = $item['tags'];
 					$list[$item['name']]['builds_url'] = $item['builds'];
 					$list[$item['name']]['download_url'] = $item['download_url'];
@@ -207,6 +213,10 @@ function moz_download_box_admin_manage_feeds() {
 					if ($list[$tag]['download_url'] != $item['download_url']) {
 						echo ("<p>Updating <em>$tag</em> download url...</p>");
 						$list[$tag]['download_url'] = $item['download_url'];
+					}
+					if ($list[$tag]['product'] != $item['product']) {
+						echo ("<p>Updating <em>$tag</em> product name...</p>");
+						$list[$tag]['product'] = $item['product'];
 					}
 					// If is scheduled and not enabled
 					if (!isset($item['enabled']) && wp_next_scheduled('moz_download_box_fetch_feeds', array($tag)) > 0) {
@@ -323,6 +333,12 @@ function moz_download_box_tag2product ($tag) {
 	return false;
 }
 
+function moz_download_box_feed2product($product_id) {
+	$options = get_option('moz_download_box_feeds');
+	
+	return ($options[$product_id]['product']);
+}
+
 function moz_download_box_draw_buttons ($tag = NULL, $locale = NULL, $os = NULL) {
 	$list  = moz_download_box_query($tag, $locale, $os);
 	$options = get_option('moz_download_box_feeds');
@@ -370,15 +386,15 @@ function moz_download_box_download_link ($template = 'http://download.mozilla.or
 }
 
 
-function moz_download_box_draw_button($tag = NULL, $locale = NULL, $os = NULL, $version = NULL, $filesize = NULL, $product = NULL, $download_url = '#') {	
+function moz_download_box_draw_button($tag = NULL, $locale = NULL, $os = NULL, $version = NULL, $filesize = NULL, $product_id = NULL, $download_url = '#') {	
   $class = 'mozilla-product-download ';
   if ($tag) $class     .= $tag . ' ';
   if ($locale) $class  .= "locale-$locale ";
   if ($os) $class      .= 'os-'. moz_download_box_platform_keyword($os)  .' ';
   if ($version) $class .= "version-$version ";
-  if ($product) $class .= "product-$product ";
+  if ($product_id) $class .= "product-$product_id ";
 
-  $out = "<p class='$class'><a href='$download_url'><strong>". __('Download') ." ". __('Firefox') ."</strong> <em>";
+  $out = "<p class='$class'><a href='$download_url'><strong>". __('Download') ." ". moz_download_box_feed2product($product_id) ."</strong> <em>";
   if ($version) $out  .= __('version') ." ". $version .", ";
   if ($locale) $out   .= "$locale, ";
   if ($os) $out       .= "$os, ";
