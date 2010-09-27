@@ -10,74 +10,218 @@ Version:        0.1.0
 
 @import url("../twentyten/style.css");
 
-body { background:/*url("http://www-archive.mozilla.org/images/body_back.gif")*/ url("http://localize.mozilla.org/html/images/page-bg.jpg") repeat-x scroll 0 0 #FFFFFF; }
-#wrapper { background: none; }
-#branding img {display: none; } /* TBD: Remove image from content */
-/*#branding {background:url("http://www-archive.mozilla.org/images/header_bl.png") repeat-x scroll left bottom #455372;}*/
-
-#footer { background: url("http://localize.mozilla.org/html/images/footer-border.png") repeat-x scroll 0 0 #e4e4e1; margin-botton: 0;}
-#colophon { border: none; } 
-
-#branding #site-title,
-#branding #site-description { background: inherit;}
-#branding { background: #455372; }
-
-
-#site-title { margin: 0; width: 940px;}
-#site-description { margin: 0; no-display: none; float: none !important;}
-
-/*#access .menu li, #access .menu li a {-moz-border-radius-topleft: 15px; background: #5f697e;}
-#access .menu li a {-moz-border-radius-topright: 15px; margin-left: 15px;}*/
-
-#access         { background: #455372; }
-#access a:hover { background: #556382;}
-
-
-.widget-container {background:/*url("http://www-archive.mozilla.org/images/menu_back.gif") repeat-y scroll right center*/ #E0E9E9;
-line-height:1em;
-margin-bottom:1em;
+body { background: #fff url("http://localize.mozilla.org/html/images/page-bg.jpg") 0 0 repeat-x; }
+#wrapper {
+	background: none;
+	padding: 0;
+	position: relative;
+	width: auto;
 }
-
-
-/*.widget-container:before {
-/ *background: transparent url("http://www-archive.mozilla.org/images/menu_tr.gif") no-repeat top right;* /
-background: transparent url("http://www-archive.mozilla.org/images/menu_tr.gif") no-repeat top right;
-height: 9px;
-		display: block;
-		border-bottom: 1px solid #ddd;
-/ *		text-align: left; content: url("http://www-archive.mozilla.org/images/key-point_tl.gif");* /
-		content: url("http://www-archive.mozilla.org/images/menu_tr.gif");
+#header {
+	background: url("http://www.mozilla.org/images/header_bl.png") 0 100% no-repeat;
+	height: 80px;
+	margin: 30px auto 0;
+	padding-top: 0;
+	position: relative;
+	width: 940px;
 }
-
-
-.widget-container:after {
-		display: block;
-		padding-top: 0;
-		line-height: 0.1;
-		font-size: 1px;
-		content:  url("http://www-archive.mozilla.org/images/key-point_bl.gif");
-		margin: 0 0 0 0;
-		height: 8px;
-		background: transparent url("http://www-archive.mozilla.org/images/menu_br.gif") scroll no-repeat bottom right ;
-		border-top: 1px solid #fff;
-	}
-*/
-
-.widget-container:before,
-.widget-container:after { 
-	border: 1px solid black;
+#masthead {background: transparent url("http://www.mozilla.org/images/header_tl.gif") 0 0 no-repeat;}
+#branding {
+	background: transparent url("http://www.mozilla.org/images/header_tr.gif") 100% 0 no-repeat;
+	padding-top: 16px;
+}
+#branding img {display: none;} /* TBD: Remove image from content */
+#site-title {
+	float: left !important;
+	margin: 0 15px;
+	width: auto;
+}
+#site-title a {
+	background: transparent url("http://www.mozilla.org/images/template/screen/logo.png") 0 0 no-repeat;
 	display: block;
-/*	background: #e0e9e9;*/
-	min-height: 18px;
-	content: "";
+	height: 51px;
+	margin: 0;
+	text-indent: -2000em;
+	width: 268px;
 }
-.widget-container:before { 	
-	-moz-border-radius-topleft: 15px; 
-	-moz-border-radius-topright: 15px; 
+#site-title a:hover {background-position: 0 -51px;}
+#site-description {display: none;}
+#access {
+	background: transparent url("http://www.mozilla.org/images/header_br.gif") 100% 100% no-repeat;
+	float: none !important;
+	margin: 0 0 0 300px;
+	position: absolute;
+	bottom: 0;
+	width: auto !important;
 }
-.widget-container:after { 	
-	-moz-border-radius-bottomleft: 15px; 
-	-moz-border-radius-bottomright: 15px; 
+#access .menu li {
+	background: url("http://www.mozilla.org/images/header_tab.gif") 100% -600px no-repeat;
+	margin-right: 1px;
+	padding-right: 6px;
 }
-	
-	
+#access .menu li a {
+	background: url("http://www.mozilla.org/images/header_tab.gif") 0 -600px no-repeat;
+	color: #fff !important;
+	font-weight: bold;
+	line-height: 1.2;
+	padding: 4px 4px 4px 10px !important;
+}
+#access .menu li:hover a {background-position: 0% -400px;}
+#access .menu li:hover {background-position: 100% -400px;}
+#access ul ul {top: 23px;}
+#access .menu li li {
+	background-image: none;
+	margin-right: 0;
+	padding-right: 0;
+}
+#access .menu li li a {
+	background: #747f96 none;
+	padding-right: 10px !important;
+}
+#access .menu li li a:hover {/*background-color: #2b3958;*/background-color: #9da5b5;}
+
+#primary {
+	background: url("menu-t.png") 100% 0 no-repeat;
+	padding-top: 9px;
+	width: 210px;
+}
+#primary .xoxo {
+	background: url("menu-b.png") 100% 100% no-repeat;
+	padding-bottom: 8px !important;
+	padding-left: 0 !important;
+}
+#primary li {margin-bottom: 0;}
+#primary h3 {
+	background-color: #e0e9e9;
+	border-right: 1px solid #d0d9d9;
+	color: #666;
+	padding: 4px 10px;
+}
+#primary ul ul {
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+
+#primary a:link, #primary a:visited {
+	background-color: #edf2f2;
+	border-bottom: 1px solid #d0d9d9;
+	border-right: 1px solid #d0d9d9;
+	border-top: 1px solid #fff;
+	color: #1948a3;
+	display: block;
+	font-size: 110%;
+	padding: 4px 20px;
+}
+#primary a:visited {color: #89668b;}
+#primary a:hover, #primary a:active {
+	background-color: #e0e9e9;
+	color: #797c7c;
+	text-decoration: none;
+}
+
+#primary #recent-comments-2 li, #searchform {
+	background-color: #edf2f2;
+	border-bottom: 1px solid #d0d9d9;
+	border-right: 1px solid #d0d9d9;
+	border-top: 1px solid #fff;
+	font-size: 110%;
+	padding: 4px 20px;
+}
+#primary #recent-comments-2 a:link, #primary #recent-comments-2 a:visited {
+	background-color: transparent;
+	border-width: 0;
+	color: #1948a3;
+	display: inline;
+	font-size: 95%;
+	padding: 0;
+}
+#primary #recent-comments-2 a:visited {color: #89668b;}
+#primary #recent-comments-2 a:hover, #primary #recent-comments-2 a:active {
+	background-color: #e0e9e9;
+	color: #797c7c;
+	text-decoration: none;
+}
+
+#main {
+	margin: 0 auto;
+	width: 940px;
+}
+/*#search-2 {
+	background: transparent;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+#s {
+	background-color: #D9DBE1;
+	border:	1px solid #9097A2;
+	padding: 2px;
+	width: 180px;
+}
+#s:hover, #s:focus {background-color: #fff;}
+#searchsubmit {
+	background-color: #6A7389;
+	border-right: 1px solid #283043;
+	border-bottom: 1px solid #283043;
+	border-top: 1px solid #9097A2;
+	border-left: 1px solid #9097A2;
+	color: #fff;
+	font-weight: bold;
+	padding: 1px 4px;
+}*/
+
+#rss-updates {
+	font-size: 80%;
+	line-height: 1;
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+#rss-updates li {width: 230px;}
+#rss-updates h3 {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 5px;
+	padding-bottom: 2px;
+}
+#rss-updates ul {
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+#rss-updates ul li {
+	clear: right;
+	overflow: auto;
+}
+#rss-updates li div {
+	background-color: #faf4c8;
+	border: 1px solid #e3de9f;
+	border-right-width: 0;
+	border-top-width: 0;
+	color: #a8a36f;
+	float: right;
+	font-size: 90%;
+	margin: 0 0 1em 0.5em;
+	padding: 5px 1px;
+	text-align: center;
+	width: 28px;
+}
+#rss-updates li div span {
+	display: block;
+	font-size: 110%;
+	font-weight: bold;
+}
+#rss-updates a:link, #rss-updates a:visited {
+	color: blue;
+	font-size: 120%;
+	text-decoration: underline;
+}
+#rss-updates a:hover, #rss-updates a:active {
+	color: #696969;
+	text-decoration: none;
+}
+
+#footer {
+	/*background: #e4e4e1 url("http://localize.mozilla.org/html/images/footer-border.png") 0 0 repeat-x;*/
+	background: #fff url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") 0 0 repeat-x;
+	margin-bottom: 0;
+	min-height: 120px;
+}
+#colophon { border: none; }
