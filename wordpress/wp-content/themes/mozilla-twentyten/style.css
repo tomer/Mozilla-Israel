@@ -146,6 +146,9 @@ body { background: #fff url("http://localize.mozilla.org/html/images/page-bg.jpg
 	margin: 0 auto;
 	width: 940px;
 }
+
+.one-column #content { width: 100% } 
+
 /*#search-2 {
 	background: transparent;
 	position: absolute;
