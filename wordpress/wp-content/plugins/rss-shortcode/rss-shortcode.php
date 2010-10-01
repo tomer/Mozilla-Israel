@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: RSS Shortcode
+Plugin Name: Simple RSS shortcode
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: A brief description of the Plugin.
 Version: 0.0.1
@@ -8,6 +8,11 @@ Author: Tomer Cohen
 Author URI: http://tomercohen.com
 License: A "Slug" license name e.g. GPL2
 */
+
+
+
+
+////////////////////
 
 
 add_shortcode('feed', 'post_feed_handler');
@@ -24,8 +29,8 @@ function post_feed_handler($atts, $content=null, $code="") {
    //           [my-shortcode]content[/my-shortcode]
    //           [my-shortcode foo='bar']content[/my-shortcode]
 
-  $out .= ("You have just added \"$code\" to the post body. My content is <em>$content</em> and I got the following parameters - \n");
-  var_dump ($atts);
+  /*$out .= ("You have just added \"$code\" to the post body. My content is <em>$content</em> and I got the following parameters - \n");
+  var_dump ($atts);*/
   
   extract(shortcode_atts(array(
     'url' => '',
@@ -36,7 +41,8 @@ function post_feed_handler($atts, $content=null, $code="") {
   ), $atts));
 
 	//return "foo = {$foo}";
-
+   
+	$out = '';
   
   // Get RSS Feed(s)
   include_once(ABSPATH . WPINC . '/feed.php');
@@ -51,10 +57,10 @@ function post_feed_handler($atts, $content=null, $code="") {
     $rss_items = $rss->get_items(0, $maxitems); 
   }
 
-  $out .= '<div class="widget-container widget_rss">';
+  $out .= '<div class="widget-container widget_rss rss-updates">';
   if ($title != '') {
     if ($title == '%') $out .= "<h3 class='widget-title'>{$rss->get_title()}</h3>";
-    else               $out .= '<h3 class="widget-title">$title</h3>';
+    else               $out .= "<h3 class='widget-title'>$title</h3>";
   }
   $out .= '<ul>';
   if ($maxitems == 0) $out .= '<li>No items.</li>';
@@ -62,6 +68,7 @@ function post_feed_handler($atts, $content=null, $code="") {
     // Loop through each feed item and display each item as a hyperlink.
     foreach ( $rss_items as $item ) { 
       $out .= '<li>';
+      $out .= '<div class="rss-date">'. $item->get_date('Y') .'<span class="rss-day-month">'. $item->get_date('d m') .'</span></div>';
       $out .= "<a href='{$item->get_permalink()}' class='rsswidget' title='{$item->get_date('j F Y | g:i a')}'>{$item->get_title()}</a>";
       $out .= '</li>';
     }

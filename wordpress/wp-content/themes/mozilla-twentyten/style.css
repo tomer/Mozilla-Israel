@@ -170,27 +170,27 @@ body { background: #fff url("http://localize.mozilla.org/html/images/page-bg.jpg
 	padding: 1px 4px;
 }*/
 
-#rss-updates {
+.rss-updates {
 	font-size: 80%;
 	line-height: 1;
 	list-style-type: none;
 	margin-right: 0 !important;
 }
-#rss-updates li {width: 230px;}
-#rss-updates h3 {
+.rss-updates li {width: 230px;}
+.rss-updates h3 {
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 5px;
 	padding-bottom: 2px;
 }
-#rss-updates ul {
+.rss-updates ul {
 	list-style-type: none;
 	margin-right: 0 !important;
 }
-#rss-updates ul li {
+.rss-updates ul li {
 	clear: right;
 	overflow: auto;
 }
-#rss-updates li div {
+.rss-updates li div {
 	background-color: #faf4c8;
 	border: 1px solid #e3de9f;
 	border-right-width: 0;
@@ -203,17 +203,17 @@ body { background: #fff url("http://localize.mozilla.org/html/images/page-bg.jpg
 	text-align: center;
 	width: 28px;
 }
-#rss-updates li div span {
+.rss-updates li div span {
 	display: block;
 	font-size: 110%;
 	font-weight: bold;
 }
-#rss-updates a:link, #rss-updates a:visited {
+.rss-updates a:link, .rss-updates a:visited {
 	color: blue;
 	font-size: 120%;
 	text-decoration: underline;
 }
-#rss-updates a:hover, #rss-updates a:active {
+.rss-updates a:hover, .rss-updates a:active {
 	color: #696969;
 	text-decoration: none;
 }
@@ -225,3 +225,16 @@ body { background: #fff url("http://localize.mozilla.org/html/images/page-bg.jpg
 	min-height: 120px;
 }
 #colophon { border: none; }
+
+
+/* HTML5/CSS3 stuff */
+#access .menu li  {
+  -moz-transition-property: opacity;
+  -moz-transition-duration: 5s;
+  opacity: 1;
+  }
+
+
+ #access .menu li:hover  {
+ opacity: 0.9;
+ }
