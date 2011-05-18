@@ -1,0 +1,339 @@
+/*
+Theme Name:     mozilla.org.il development theme (based on WordPress TwentyEleven)
+Theme URI:      http://mozilla.org.il
+Description:    Child theme for the Twenty Eleven theme 
+Author:         Tomer Cohen
+Author URI:     http://tomercohen.com
+Template:       twentyeleven
+Version:        0.1.1
+*/
+
+
+
+@import url("../twentyeleven/style.css");
+
+
+
+@font-face {
+  font-family: "Delicious";
+  src: url("fonts/Delicious-Bold.otf"); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+}
+
+
+body { background: #fff url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x; }
+#page { background: none;}
+
+
+/* style only the navbar 
+#access {
+	-moz-border-radius: 5px;
+	background: #747f96;
+}*/
+
+
+/* Header palette 
+
+#455372 … #455372 … #2a3753
+#747f96 - menu tabs
+*/
+
+/* reset padding/margin */
+#branding #site-title  { padding: 0; }
+#branding #site-description { margin: 0; }
+
+#branding { border:0; }
+
+#branding { 
+	margin: 20px; 
+	background: #455372;
+	border-radius: 5px 5px 0 0;
+	padding-bottom: 3px; /* Fix box shadowing issues */ 
+}
+
+#access {
+	box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.4);
+}
+#branding { 
+	box-shadow: 3px 0px 2px rgba(0, 0, 0, 0.4);
+}
+
+#access { 
+	background: #455372;
+	background: -moz-linear-gradient(-90deg,#455372,#2a3753);
+	border-radius: 0 0 5px 5px;
+}
+
+#access .menu li { 
+
+/*	background: #5f697e;*/
+}
+
+#access li:hover > a {
+	border-radius: 10px 10px 0 0;
+/*	border-radius: 10px 10px 0 0;*/
+	background: #747f96;
+	background: -moz-linear-gradient(-90deg,#747f96,#2a3753);
+	color: white;
+}
+
+#site-title { 
+	font-family: "Delicious", sans-serif; 
+	text-shadow: 0 0 1px white; 
+}
+
+#site-title a { 
+	color: white;
+	opacity: 0.9;	
+} 
+
+#site-title a:hover { 
+	text-shadow: 0 0 4px white;
+}
+
+
+/* #colophon { / * footer */
+#site-generator {
+    background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll 0 0 #FFFFFF;
+    margin-bottom: 0;
+    min-height: 120px;
+    border: none;
+    position: absolute;
+    left: 0; 
+    width: 100%;
+    min-height: 0;
+}
+
+
+/*#wrapper {
+	background: none;
+	padding: 0;
+	position: relative;
+	width: auto;
+}
+#header {
+	background: url("http://www.mozilla.org/images/header_bl.png") 0 100% no-repeat;
+	height: 80px;
+	margin: 30px auto 0;
+	padding-top: 0;
+	position: relative;
+	width: 940px;
+}
+#masthead {background: transparent url("http://www.mozilla.org/images/header_tl.gif") 0 0 no-repeat;}
+#branding {
+	background: transparent url("http://www.mozilla.org/images/header_tr.gif") 100% 0 no-repeat;
+	padding-top: 16px;
+}
+#branding img {display: none;} / * TBD: Remove image from content * /
+#site-title {
+	float: left !important;
+	margin: 0 15px;
+	width: auto;
+}
+#site-title a {
+	background: transparent url("http://www.mozilla.org/images/template/screen/logo.png") 0 0 no-repeat;
+	display: block;
+	height: 51px;
+	margin: 0;
+	text-indent: -2000em;
+	width: 268px;
+}
+#site-title a:hover {background-position: 0 -51px;}
+#site-description {display: none;}
+#access {
+	background: transparent url("http://www.mozilla.org/images/header_br.gif") 100% 100% no-repeat;
+	float: none !important;
+	margin: 0 0 0 300px;
+	position: absolute;
+	bottom: 0;
+	width: auto !important;
+}
+#access .menu li {
+	background: url("http://www.mozilla.org/images/header_tab.gif") 100% -600px no-repeat;
+	margin-right: 1px;
+	padding-right: 6px;
+}
+#access .menu li a {
+	background: url("http://www.mozilla.org/images/header_tab.gif") 0 -600px no-repeat;
+	color: #fff !important;
+	font-weight: bold;
+	line-height: 1.2;
+	padding: 4px 4px 4px 10px !important;
+}
+#access .menu li:hover a {background-position: 0% -400px;}
+#access .menu li:hover {background-position: 100% -400px;}
+#access ul ul {top: 23px;}
+#access .menu li li {
+	background-image: none;
+	margin-right: 0;
+	padding-right: 0;
+}
+#access .menu li li a {
+	background: #747f96 none;
+	padding-right: 10px !important;
+}
+#access .menu li li a:hover {/ *background-color: #2b3958;* /background-color: #9da5b5;}
+
+#primary {
+	background: url("menu-t.png") 100% 0 no-repeat;
+	padding-top: 9px;
+	width: 210px;
+}
+#primary .xoxo {
+	background: url("menu-b.png") 100% 100% no-repeat;
+	padding-bottom: 8px !important;
+	padding-left: 0 !important;
+}
+#primary li {margin-bottom: 0;}
+#primary h3 {
+	background-color: #e0e9e9;
+	border-right: 1px solid #d0d9d9;
+	color: #666;
+	padding: 4px 10px;
+}
+#primary ul ul {
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+
+#primary a:link, #primary a:visited {
+	background-color: #edf2f2;
+	border-bottom: 1px solid #d0d9d9;
+	border-right: 1px solid #d0d9d9;
+	border-top: 1px solid #fff;
+	color: #1948a3;
+	display: block;
+	font-size: 110%;
+	padding: 4px 20px;
+}
+#primary a:visited {color: #89668b;}
+#primary a:hover, #primary a:active {
+	background-color: #e0e9e9;
+	color: #797c7c;
+	text-decoration: none;
+}
+
+#primary #recent-comments-2 li, #searchform {
+	background-color: #edf2f2;
+	border-bottom: 1px solid #d0d9d9;
+	border-right: 1px solid #d0d9d9;
+	border-top: 1px solid #fff;
+	font-size: 110%;
+	padding: 4px 20px;
+}
+#primary #recent-comments-2 a:link, #primary #recent-comments-2 a:visited {
+	background-color: transparent;
+	border-width: 0;
+	color: #1948a3;
+	display: inline;
+	font-size: 95%;
+	padding: 0;
+}
+#primary #recent-comments-2 a:visited {color: #89668b;}
+#primary #recent-comments-2 a:hover, #primary #recent-comments-2 a:active {
+	background-color: #e0e9e9;
+	color: #797c7c;
+	text-decoration: none;
+}
+
+#main {
+	margin: 0 auto;
+	width: 940px;
+}
+
+.one-column #content { width: 100% } 
+
+/ *#search-2 {
+	background: transparent;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+#s {
+	background-color: #D9DBE1;
+	border:	1px solid #9097A2;
+	padding: 2px;
+	width: 180px;
+}
+#s:hover, #s:focus {background-color: #fff;}
+#searchsubmit {
+	background-color: #6A7389;
+	border-right: 1px solid #283043;
+	border-bottom: 1px solid #283043;
+	border-top: 1px solid #9097A2;
+	border-left: 1px solid #9097A2;
+	color: #fff;
+	font-weight: bold;
+	padding: 1px 4px;
+}* /
+
+.rss-updates {
+	font-size: 80%;
+	line-height: 1;
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+.rss-updates li {width: 230px;}
+.rss-updates h3 {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 5px;
+	padding-bottom: 2px;
+}
+.rss-updates ul {
+	list-style-type: none;
+	margin-right: 0 !important;
+}
+.rss-updates ul li {
+	clear: right;
+	overflow: auto;
+}
+.rss-updates li div {
+	background-color: #faf4c8;
+	border: 1px solid #e3de9f;
+	border-right-width: 0;
+	border-top-width: 0;
+	color: #a8a36f;
+	float: right;
+	font-size: 90%;
+	margin: 0 0 1em 0.5em;
+	padding: 5px 1px;
+	text-align: center;
+	width: 28px;
+}
+.rss-updates li div span {
+	display: block;
+	font-size: 110%;
+	font-weight: bold;
+}
+.rss-updates a:link, .rss-updates a:visited {
+	color: blue;
+	font-size: 120%;
+	text-decoration: underline;
+}
+.rss-updates a:hover, .rss-updates a:active {
+	color: #696969;
+	text-decoration: none;
+}
+
+#footer {
+	/ *background: #e4e4e1 url("http://localize.mozilla.org/html/images/footer-border.png") 0 0 repeat-x;* /
+	background: #fff url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") 0 0 repeat-x;
+	margin-bottom: 0;
+	min-height: 120px;
+}
+#colophon { border: none; }
+
+* /
+
+/* HTML5/CSS3 stuff * /
+#access .menu li  {
+  -moz-transition-property: opacity;
+  -moz-transition-duration: 5s;
+  opacity: 1;
+  }
+
+
+ #access .menu li:hover  {
+ opacity: 0.9;
+ }
+ 
+ /* */
