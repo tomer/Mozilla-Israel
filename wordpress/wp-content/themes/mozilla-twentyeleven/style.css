@@ -19,10 +19,11 @@ Version:        0.1.1
   src: url("fonts/Delicious-Bold.otf"); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
 }
 
-
-body { background: #fff url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x; }
+html { 	background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll bottom #FFFFFF; margin:0;}
+body { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x; }
 #page { background: none;}
 
+#site-generator { border: none; background: none;}
 
 /* style only the navbar 
 #access {
@@ -91,16 +92,19 @@ body { background: #fff url("page-bg.jpg") /*url("http://localize.mozilla.org/ht
 }
 
 
+
+
+
 /* #colophon { / * footer */
 #site-generator {
-    background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll 0 0 #FFFFFF;
+    /*background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll 0 0 #FFFFFF;*/
     margin-bottom: 0;
     min-height: 120px;
     border: none;
-    position: absolute;
     left: 0; 
     width: 100%;
     min-height: 0;
+    bottom: 0;
 }
 
 
