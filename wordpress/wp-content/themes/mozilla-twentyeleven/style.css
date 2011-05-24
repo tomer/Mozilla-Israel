@@ -19,11 +19,14 @@ Version:        0.1.1
   src: url("fonts/Delicious-Bold.otf"); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
 }
 
-html { 	background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll bottom #FFFFFF; margin:0;}
-body { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x; }
+body { 	background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll bottom;  }
+html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x #FFFFFF; }
 #page { background: none;}
 
-#site-generator { border: none; background: none;}
+#site-generator { border: none; 
+	background: none;
+	max-height: 117px; /* Background height */
+}
 
 /* style only the navbar 
 #access {
@@ -47,7 +50,7 @@ body { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 #branding { 
 	margin: 20px; 
 	background: #455372;
-	border-radius: 5px 5px 0 0;
+	border-radius: 10px 10px 0 0;
 	padding-bottom: 3px; /* Fix box shadowing issues */ 
 }
 
@@ -61,7 +64,12 @@ body { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 #access { 
 	background: #455372;
 	background: -moz-linear-gradient(-90deg,#455372,#2a3753);
-	border-radius: 0 0 5px 5px;
+	border-radius: 0 0 10px 10px;
+}
+
+
+#branding #searchform {
+	top: 1em;
 }
 
 #access .menu li { 
@@ -69,11 +77,28 @@ body { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 /*	background: #5f697e;*/
 }
 
-#access li:hover > a {
+/*#access li:hover > a {
 	border-radius: 10px 10px 0 0;
-/*	border-radius: 10px 10px 0 0;*/
+/ *	border-radius: 10px 10px 0 0;* /
 	background: #747f96;
 	background: -moz-linear-gradient(-90deg,#747f96,#2a3753);
+	color: white;
+}*/
+
+
+#access a {
+    line-height: inherit;
+}
+
+#access li > a {
+	border-radius: 10px 10px 0 0;
+	background: #677187;
+	margin-right: 1px;
+	padding: 4px 10px 5px;
+}
+#access li:hover > a {
+	background: #747f96;
+	text-shadow: 0 0 3px yellow;
 	color: white;
 }
 
