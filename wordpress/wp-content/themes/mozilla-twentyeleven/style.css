@@ -19,7 +19,17 @@ Version:        0.1.1
   src: url("fonts/Delicious-Bold.otf"); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
 }
 
-body { 	background: url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png") repeat-x scroll bottom;  }
+#colophon /* Here I'm trying to get rid of the margins... */ {
+	background: url("footer-portal-border.png") /*url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png")*/ repeat-x scroll top; 
+}
+#page { max-width: none; }
+body { padding: 0; }
+#branding { max-width: 800px; margin: auto; } /* Top navigation bar */
+/*End of experiment ☺ */
+
+
+
+body { 	background: url("footer-portal-border.png") /*url("http://mozcom-cdn.mozilla.net/img/tignish/template/footer-portal-border.png")*/ repeat-x scroll bottom;  }
 html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/images/page-bg.jpg")*/ 0 0 repeat-x #FFFFFF; }
 #page { background: none;}
 
@@ -48,7 +58,7 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 #branding { border:0; }
 
 #branding { 
-	margin: 20px; 
+/*	margin: 20px; */
 	background: #455372;
 	border-radius: 10px 10px 0 0;
 	padding-bottom: 3px; /* Fix box shadowing issues */ 
@@ -95,6 +105,9 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 	background: #677187;
 	margin-right: 1px;
 	padding: 4px 10px 5px;
+
+	-moz-transition-property: background; /* MozHTML5/MozCSS3 Tweaks */
+	-moz-transition-duration: 5s; /* I am not sure if it is visible enough, though. - Tomer. */
 }
 #access li:hover > a {
 	background: #747f96;
@@ -353,7 +366,7 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 
 * /
 
-/* HTML5/CSS3 stuff * /
+/ * HTML5/CSS3 stuff * /
 #access .menu li  {
   -moz-transition-property: opacity;
   -moz-transition-duration: 5s;
@@ -365,4 +378,4 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
  opacity: 0.9;
  }
  
- /* */
+ / * */
