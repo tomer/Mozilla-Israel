@@ -107,14 +107,33 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 	padding: 4px 10px 5px;
 
 	-moz-transition-property: background; /* MozHTML5/MozCSS3 Tweaks */
-	-moz-transition-duration: 5s; /* I am not sure if it is visible enough, though. - Tomer. */
+	-moz-transition-duration: 2s /* I am not sure if it is visible enough, though. - Tomer. */ /* 5s is way too much - Elad. */
 }
 #access li:hover > a {
 	background: #747f96;
 	text-shadow: 0 0 3px yellow;
 	color: white;
+	-moz-transition-property: background;
+	-moz-transition-duration: 2s;
 }
-
+#access ul ul {
+	top: 2.3em;
+	box-shadow: none;
+}
+#access ul ul a {
+	border-radius: 0;
+	background: #677187;
+	color: white;
+	-moz-transition: 0.2s all;
+}
+#access ul ul a:hover {
+	background: #677187;
+	-moz-transition: 0.2s all;
+}
+#access ul ul *:last-child a {
+	border-radius: 0 0 10px 10px;
+	border-bottom: none;
+}
 #site-title { 
 	font-family: "Delicious", sans-serif; 
 	text-shadow: 0 0 1px white; 
@@ -128,9 +147,6 @@ html { background: url("page-bg.jpg") /*url("http://localize.mozilla.org/html/im
 #site-title a:hover { 
 	text-shadow: 0 0 4px white;
 }
-
-
-
 
 
 /* #colophon { / * footer */
