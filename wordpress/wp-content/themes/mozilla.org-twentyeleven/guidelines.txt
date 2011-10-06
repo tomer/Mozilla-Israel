@@ -1,0 +1,4 @@
+* Theme should be based in WordPress default theme in order to make it easier to develop and maintenance. 
+* Theme is developed in RTL in mind, but should work well on LTR.
+* Theme should be i18n-ready so we would be able to allow other Mozilla communities to use it. 
+* HTML5 and CSS3 are allowed, but we must make sure older browsers will see it well.
