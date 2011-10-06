@@ -1,0 +1,13 @@
+@import url("../twentyeleven/rtl.css");
+
+#site-title {
+	float: left;
+}
+
+#site-generator {
+	float: none;
+}
+
+.entry-title, .entry-meta {
+	float: none;
+}

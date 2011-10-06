@@ -1,0 +1,116 @@
+/*
+Theme Name:     mozilla.org.il development theme try 3 (based on WordPress TwentyEleven)
+Theme URI:      http://mozilla.org.il
+Description:    tbd
+Author:         Tomer Cohen
+Author URI:     http://tomercohen.com
+Template:       twentyeleven
+Version:        0.1.1
+*/
+
+
+
+@import url("../twentyeleven/style.css");
+
+
+#page { 
+/*	border-bottom: 4px red solid;*/
+	background: url(http://www.mozilla.org/images/template/dino.png) no-repeat top left #333;  /* almost black */
+	
+	max-width: none; /* Make the page wider */
+}
+
+#branding {
+	border-top: none;
+}
+
+#page {
+	margin: 0 auto;
+}
+
+#access { 
+	border-bottom: #A5151E 10px solid;
+	background: inherit;
+	margin-bottom: 0;
+}
+
+#primary, #main {
+	background: white;
+}
+
+#content {
+	max-width: 1000px; /* Make content area default */
+}
+
+#colophon {
+	border-top: 10px solid #A5151E;
+}
+
+#supplementary {
+	border-top: 0;
+}
+
+body { 
+	padding: 0;
+}
+html {
+	/*margin-top: 0 !important;*/
+	background: #333;
+}
+
+#site-description { 
+/*	clear: none;*/
+	margin: 0;
+}
+
+#site-title {
+	padding: 0;
+}
+
+#site-title a, #site-title a:hover, #site-title a:focus, #site-title a:active {
+	color: #ddd;
+}
+
+#access li a {
+	font-weight: bold;
+}
+
+#access li {
+	float: right;
+}
+
+#access li:hover > a {
+	background: none;
+}
+
+#access li a:hover {
+	color: #F59D56;
+}
+
+#access {
+	box-shadow: none;
+}
+
+#access ul {
+	margin: auto;
+	max-width: 800px;
+	float: right;
+}
+
+#branding #searchform {
+	right: 30%;
+	top: 1em;
+}
+
+.page-template-showcase-php #content, .left-sidebar.page-template-showcase-php #content {
+	margin: auto;
+}
+
+#site-generator {
+	background: none;
+	border: none;
+	padding: 0;
+	float: none;
+}
+
+#branding a img {display: none;} /*XXX*/
