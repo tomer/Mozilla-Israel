@@ -1,5 +1,0 @@
-@import url("../twentyten/rtl.css");
-
-#site-title {
-	float: left;
-}
