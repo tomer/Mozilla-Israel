@@ -74,12 +74,6 @@ html {
 /*	clear: none;*/
 	margin: 0;
 }
-#site-description { 
-	margin-bottom: 5px;
-}
-.home #site-description { 
-	margin-bottom: 3.65625em;
-}
 
 #site-title {
 	padding: 0;
