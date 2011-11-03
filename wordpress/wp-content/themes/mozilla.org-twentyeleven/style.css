@@ -38,6 +38,11 @@ Version:        0.1.1
 	margin-bottom: 0;
 }
 
+#access li:hover {
+	background: white;
+	color: #F59D56;
+}
+
 #primary, #main {
 	background: white;
 }
