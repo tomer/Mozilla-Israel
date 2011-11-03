@@ -1,0 +1,20 @@
+@import url("../twentyeleven/rtl.css");
+
+#site-title {
+	float: none;
+}
+
+#site-description { 
+	margin-bottom: 5px;
+}
+.home #site-description { 
+	margin-bottom: 3.65625em;
+}
+
+#site-generator {
+	float: none;
+}
+
+.entry-title, .entry-meta {
+	float: none;
+}

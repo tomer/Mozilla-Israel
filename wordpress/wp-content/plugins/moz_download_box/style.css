@@ -1,0 +1,35 @@
+.mozilla-product-download {margin: 10px;}
+.mozilla-product-download a {
+	display: block;
+	padding: 20px 20px 0 0;
+	width: 320px;
+/*	background: transparent url("http://www.mozilla.com/img/tignish/home/download-button.png") 40px 0 no-repeat;*/
+	background: transparent url("download-button.png") 40px 0 no-repeat; 
+	color: #338d28;
+	height: 74px;
+	text-decoration: none;
+	font: 15px/1 Arial, sans-serif;
+}
+/*.mozilla-product-download a:hover {background-position: -260px 0;}*/
+.mozilla-product-download a:hover {background-position: 40px -93px;}
+.mozilla-product-download img {
+	display: block;
+	border-width: 0;
+	float: left;
+	margin-top: -20px;
+	width: 100px;
+}
+.mozilla-product-download strong {
+	display: block;
+	line-height: 23px;
+	padding-right: 25px;
+	background: url("http://www.firefox.co.il/img/tignish/firefox/download-arrow.png") 100% 50% no-repeat;
+	font-size: 140%;
+	font-weight: normal;
+}
+.mozilla-product-download em {
+	font-size: 80%;
+	font-style: normal;
+}
+
+/*.mozilla-product-download.locale-he a { background: green; }*/
